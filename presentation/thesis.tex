@@ -1,0 +1,171 @@
+% CMPthesis: LaTeX class for both master and phd thesis
+% cmpthesis.tex: test and demonstration file
+% (c) 2007 Vit Zyka
+%
+% 2007-03-23 v0.1 first version
+% 2008-05-16 v0.2 document part reorder
+
+\documentclass[msc]{cmpthesis}
+
+%\documentclass[phd]{cmpthesis}
+
+% --- packages you need (graphicx,color,hyperref already loaded)
+%\usepackage{czech}
+
+% --- usefull draft packages
+%\usepackage[notref]{showkeys} % show labels for referencies
+%\usepackage{showlabels}       % similar
+%\usepackage{showidx}          % show index entries on every page
+
+% ======================================================== thesis info
+% ============================== your definitions (abbreviations etc.)
+%\def\Ax{\mathbf{A}_x}
+
+% =========================================================== settings
+
+% ========================================================== text body
+
+% ========================================================== libraries and stuff
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{psfrag}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{epstopdf} % eps pics
+\usepackage{textcomp} % tilda
+\usepackage{subfig}
+\usepackage{dirtree}
+\usepackage[section]{placeins}
+
+\usepackage{pdfpages}
+
+
+\usepackage[linesnumbered, lined, ruled]{algorithm2e}
+%\usepackage{algpseudocode}
+
+\usepackage{graphicx,wrapfig,lipsum}
+%
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\M}[1]{\mathtt{#1}}
+\newcommand{\V}[1]{\mathbf{#1}}
+\newcommand{\set}[1]{{\left\{#1\right\}}}
+\newcommand{\arr}[2]{\begin{array}{#1} #2\end{array}}
+\newcommand{\mat}[2]{\left[\!\!\arr{#1}{#2}\!\!\right]}
+\newcommand{\cross}[1]{\left[#1\right]_\times}
+\newcommand{\mdet}[2]{\left|\!\arr{#1}{#2}\!\right|}
+\newcommand{\TP}[1]{{\color{blue} TP: #1}}
+\newcommand{\OR}[1]{{\color{green} OR: #1}}
+\newcommand{\Done}[1]{{\color{lightgray} #1}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}%
+ \def\kronecker{\raisebox{1pt}{\ensuremath{\:\otimes\:}}} 
+\DeclareMathOperator{\vect}{vec}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\T}[0]{\text{T}}
+
+\setcounter{secnumdepth}{2}
+
+\graphicspath{{./graphs_n_figures/}}
+
+%% list of symbols and abbreviations
+\usepackage[acronym,nonumberlist,style=long,sort=def]{glossaries}
+\setlength{\glsdescwidth}{0.6\linewidth}
+\setlength{\glspagelistwidth}{0.4\linewidth}
+\renewcommand*{\glsgroupskip}{}
+\newcommand{\Acronym}[2]{\newacronym{#1}{#1}{#2}}
+\input{acronyms}
+\makeglossaries
+
+
+%% Thesis Header
+\startThesisInfo
+\title{Robust Focal Length Computation}
+\author{Oleh Rybkin}
+\CMPAdvisor{Ing. Tom\'a\v s Pajdla, PhD.}
+\CMPReportNo{}
+%\CMPAcknowledgement{\centering Acknowledge grants here. Use centering
+%   if the text is too short.}
+\CMPEmail{rybkiole@fel.cvut.cz}  
+%\CMPDocumentURL{Write the full URL of the paper here, if available in the electronic form.}
+\stopThesisInfo
+
+
+% ===== Where it all begins ========================
+
+
+\begin{document}
+
+\maketitle[3]
+
+\cleardoublepage\def\thepage{\roman{page}}\setcounter{page}{3}
+
+\includepdf[pages={1}]{assignment.pdf}
+
+\cleardoublepage
+
+\input{acknowledgement}
+\clearpage
+\input{declaration}
+\clearpage
+\input{abstract}
+\clearpage
+\cleardoublepage\def\thepage{\arabic{page}}\setcounter{page}{1}
+\tableofcontents\pagestyle{headings}
+
+
+\listoffigures
+
+%\listofalgorithms
+
+\glsaddall
+\printglossary[type=\acronymtype,title=List of Symbols and Abbreviations]
+\printglossary
+
+
+
+
+
+\include{chapters/intro}
+
+\include{chapters/basic_notions}
+
+\include{chapters/related}
+
+\include{chapters/analysis}
+
+\include{chapters/algeom}
+
+\include{chapters/thenew}
+
+\include{chapters/conclu}
+
+\appendix
+
+\input{CD.tex}
+
+\bibliographystyle{plain}
+\bibliography{citations}{}
+
+\end{document}

@@ -1,0 +1,34 @@
+
+MOST IMPORTANT:
+    Write conclusions and contribution 
+    Discuss the amendments
+    Let him reread intro graphs and conclusions
+    Check articles
+
+
+Very good to do:
+    bundler - graph s ohniskovema vzdalenostma, 3d graph s camerama, 3d graph s inicializacema
+    add why to use prior
+
+Change the names of the algorithms 7pt -> rank constraint, 8pt -> no constraint
+
+when to use words instead of numbers
+
+Add graph about ratio formula being better
+
+Analyzis:
+    add: voting, ransac
+    add two different evaluation procedures for voting/optimization
+    add a proof for fundamental matrix?
+    explain whats component and elimination?
+
+
+Mistakes:
+    figure -> Fig.
+    et al.  -> et al.\
+    used correspondences -> correspondences used
+    ([1-9])pt [method] -> $1pt algorithm
+    is -> is equal to
+    * the Fig. -> in the Fig.
+    equation -> Eq.
+    T -> \text{T}

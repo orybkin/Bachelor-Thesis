@@ -1,0 +1,18 @@
+\chapter{Conclusions}
+
+In this work, we have focused on the methods of computing the focal length from point correspondences. 
+
+In Chapter~\ref{seq:basic} we surveyed the existing methods for this task, as well as the basic concepts needed for understanding them. We provided specific degeneracies of the methods and other cases where they might fail.
+ 
+In Chapter~\ref{seq:analysis} we analyzed the performance of the different methods for computing the focal length. We have revealed several trends which these algorithms exhibit. Firstly, the error of the focal length estimation declines rapidly with growing number of correspondences. Secondly, with growing number of correspondences, the number of imaginary focal length estimates also declines. A conclusion can be made that the standard methods work fairly well for scenes where a sufficient number of inlier correspondences may be found.
+
+We compared the performance of minimal solvers that use or don't use the rank constraint (Eq.~\ref{eq:rank}). Our results found that using rank constraint isneficial for the performance, however, such a solver might produce a larger fraction of imaginary estimates.
+
+We found that  the computation of the ratio of focal length $r= f_2 \slash f_1$ by the Bougnoux formula~\cite{Bougnoux} is more robust than the computation of $f_1$ or $f_2$ alone. Interestingly, this robustness is preserved even when both focal length estimates are imaginary.
+
+We furthermore assessed the performance of the methods in  degenerate situations. The results showed that for bigger levels of noise in image measurements the effect of the degeneracies significantly decreases. Specifically, the effects of the intersecting optical axes degeneracy was shown to be mild under 1 pixel noise in image measurements already.
+
+
+In Chapter~\ref{seq:algeom} we analyzed the problem of computing focal length using the techniques of algebraic geometry. We have shown how the Bougnoux formula may be derived with these techniques and give two new formulae for computing camera focal length from a fundamental matrix, as well as one formula for the ratio of the focal length.  We have shown that using the right formula helps avoiding a known degeneracy. Specifically, the degeneracy where the plane defined by the baseline and the optical axis of one camera is perpendicular to the plane defined by the baseline and optical axis of the other camera, and where Bougnoux~(\cite{Bougnoux}) formula fails can in some cases be avoided. The degeneracy reduces to the case where all three formulae fail.
+
+In Chapter~\ref{seq:thenew} we suggested improvements to the existing methods using our suggestion that computation of the ratio of focal length $r= f_2 \slash f_1$ is more robust than computation of $f_1$ or $f_2$ alone. We have shown that this fact indeed may improve performance of a solver. We suggested a modification to the solver of~\cite{HartleyPriors} and demonstrated an improvement in focal length estimation quality over the original method. Finally, we presented a survey of optimization methods for focal lengths computing and have shown that the optimization methods using prior focal length information may exhibit robust performance even under big amounts of noise in image measurements.

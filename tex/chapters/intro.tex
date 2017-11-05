@@ -1,0 +1,45 @@
+
+\chapter{Introduction}
+\section{Motivation}
+We analyze the problem of computing epipolar geometry of two partially calibrated cameras, where only the focal lengths are unknown.
+
+Estimating epipolar geometry with unknown focal lengths is an important issue in practical problems. In the laboratory environment it is possible to calibrate the camera beforehand using established procedures~\cite{HartZiss}. When taking images in the wild, however, it is often impractical or impossible to use these procedures. It is desirable to have an automated procedure to estimate camera calibration from images themselves. 
+
+The usual way~\cite{bundler,colmap,openMVG} to estimate camera external and internal parameters is to extract points of interests~\cite{SURF,SIFT} with tentative correspondences, and use RANSAC~\cite{USAC} method for joint estimation of correspondence inlier pairs and camera parameters. In RANSAC, a procedure to compute camera parameters from a (preferably small) number of points is needed. These procedures, that essentially are used as black box in RANSAC, are called minimal problems because it is desirable to find a procedure that would use the theoretical minimum number of correspondences.
+
+The basic procedure to compute the focal lengths and epipolar geometry given correspondences consists of two steps: finding a fundamental matrix and decomposing the matrix into calibration matrices and essential matrix. For the first task, the minimal needed number of correspondences is 7. Hartley and Zisserman~\cite{HartZiss} describe an algorithm for this which uses 7 correspondences as well as the singularity condition. The algorithm gives three different estimations of the matrix, i.e. one correct and two false ones. Hartley~\cite{HartleyDefense} also summarizes an  algorithm by Longuet-Higgins~\cite{Higgins} which uses 8 correspondences instead. Bougnoux~\cite{Bougnoux} gives a concise formula to compute focal length from the fundamental matrix, if the rest of calibration information, i.e., the principal point, the skew, the ratio of the pixel dimensions, is known.
+
+The procedure suffers from a number of known failure cases:
+\begin{itemize}
+    \item It is not possible to determine a fundamental matrix if the correspondences are in singular position.
+    \item The camera pair may have intersecting (or parallel) optical axes. In that case it is impossible to determine the focal lengths.
+    \item The plane defined by the baseline and the optical axis of one camera may be perpendicular to the plane defined by the baseline and optical axis of the other camera. In this case no focal length can be recovered as the Bougnoux formula fails.
+    \item All computed fundamental matrices may have rank 1 or be complex. 
+    \item A computed focal length may be complex.
+    \item There may be no such computed camera configuration where most points in 3D space lie in front of the cameras.
+\end{itemize}
+
+Because of these deficiencies, the commonly held view is that the algebraic approach of using 7pt algorithm and Bougnoux formula is not robust, and sometimes fails entirely, unable to find any valid solution. Hartley~\cite{HartleyPriors} argues that in many practical cases this approach cannot be used. Other methods~\cite{HartleyPriors,CNN,KanataniSub} were proposed to solve this problem. Neither of these approaches, however, works decisively better.
+
+We analyze the procedure of computing focal lengths from points correspondences and different degeneracies to show that slight modifications of the procedure allow to alleviate a number of the problems.
+
+
+\section{Related work}
+Hartley and Silpa-Anan~\cite{HartleyPriors}  develop an iterative algorithm which incorporates heuristic estimates (prior knowledge) of focal lengths. The authors use optimization  on a certain cost function which includes the Sampson error, priors of focal lengths and priors of principal points.  They show that by allowing the algorithm to move principal point better results can be obtained. 
+The algorithm shows competitive, although not decisively better performance in comparison to 7pt approach. In this thesis, we propose an improvement to this algorithm and demonstrate better performance.
+
+Chandraker~\cite{Chandraker} further explores the idea of using priors of focal lengths. He defines a simpler cost function, and uses epipolar constraints as hard constraints, instead of including Sampson error in the cost function. The work considers two same focal lengths, but the algorithm can be easily extended to incorporate two focal lengths. 
+
+Nakatsuji et al.~\cite{Kanatani3} show that even when the two focal lengths are the same, the 7pt algorithm (which assumes they are different) yields better accuracy than methods which assume the same focal length.
+When the 7pt algorithm with the Bougnoux formula fail to produce a real focal length, he authors use 'subsampling' procedure. Points are subsampled from the set of inliers and the focal length is recomputed  each time from the sample until a real focal length is found.
+
+Kanazawa et al.~\cite{KanataniSub} use three views for computing camera parameters (only two-view correspondences are needed for the method). Exploiting three different view pairs they are able to give more stable results than two-view methods.
+
+DeepFocal, a recent algorithm by Scott Workman et al.~\cite{CNN}, uses a Convolutional Neural Network to estimate the focal length directly from one image. The neural network outperforms other approaches based on one view. While an interesting and fresh idea, authors didn't compare DeepFocal to any existing two-view approaches, therefore it is difficult to assess the advantages of the work.
+
+\section{Thesis structure}
+
+
+Our contributions are presented in Chapters~\ref{seq:analysis}, \ref{seq:algeom} and \ref{seq:thenew}.
+
+In Chapter~\ref{seq:basic} we survey the basic concepts and establish notation for the thesis. In  Chapter~\ref{seq:analysis} we provide an analysis of the known methods for focal length computation and show their performance. In  Chapter~\ref{seq:algeom} we use algebraic geometry to further analyze the problem. In  Chapter~\ref{seq:thenew} we suggest improvements to the current methods using our analysis from  Chapter~\ref{seq:analysis}. We also provide a survey of methods that use prior focal length information.

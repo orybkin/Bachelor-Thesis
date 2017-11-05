@@ -1,0 +1,27 @@
+
+
+\chapter*{Abstract}
+The problem of automatically computing focal lengths of a pair of cameras from corresponding pair of images has long been a daunting task for 3D reconstruction  community. A number of methods were developed, but the commonly held view is that neither of them works good enough to be used in practical situations. We focus on the particular task of computing focal lengths from the point correspondences, which we deem to be the missing link for the problem solution.
+
+We especially focus on existing algebraic solvers for computing the fundamental matrix and the Bougnoux formula for computing the focal lengths therefrom. We  survey these methods, as well as iterative methods \cite{HartleyPriors,Chandraker} proposed as their extensions,  and analyze their performance. Our results show that the number of imaginary estimates, as well as the error of the estimation, declines with growing number of correspondences used.  Moreover, based on our analysis we suggest that the computation of the ratio of focal length $r= f_2 \slash f_1$ is more robust than
+computation of $f_1$ or $f_2$ alone. We propose an improvement to the solver of~\cite{HartleyPriors} based on this suggestion.
+
+We furthermore assess performance of the methods in  degenerate situations, and show that for bigger levels of noise the effect of the degeneracies significantly decreases. Specifically, the degenerate case of intersecting optical axes is shown to almost vanish for realistic levels of noise.
+
+We finally analyze the problem of computing focal length from the theoretical standpoint of algebraic geometry, and give two new formulae for computing camera focal length from a fundamental matrix. We show that using the right of them might help to avoid a known degeneracy. Specifically, the degeneracy where the plane defined by the baseline and the optical axis of one camera is perpendicular to the plane defined by the baseline and optical axis of the other camera, and where Bougnoux~(\cite{Bougnoux}) formula fails can in some cases be avoided. The degeneracy reduces to the case where all three formulae fail.
+
+\paragraph{Keywords:} computer vision, 3D reconstruction, minimal problems, focal length, Gr\"ob\-ner basis
+
+\begin{otherlanguage}{czech}
+\chapter*{Abstrakt}
+
+Problém automatického výpočtu ohniskových vzdáleností dvou kamer z odpovídajících obrázků je stále obtížnou úlohou pro komunitu 3D rekonstrukce. Pro vyřešení tohoto problému byla navržena řada metod. Má se ale za to, že žadná z nich nefunguje natolik dobře, aby mohla být použita v praktické situaci. V této tezi se proto  zaměříme na úlohu výpočtu ohniskové vzdálenosti z korespondencí v obrázku, kterou považujeme za chybějící článek pro vyřešení problému.
+
+Zejména se zaměříme na existující algebraické solvery pro výpočet fundamentální matice, a na Bougnouxův vzorec, který z ní vypočte ohniskovou vzdálenost. Tyto metody prozkoumáme a zanalyzujeme jejich výkonnost. Ukážeme, že počet imaginárních odhadů, jakož i chyba odhadu ohniskové vzdálenosti klesají s rostoucím počtem použitých korespondencí. Rovněž zanalyzujeme degenerace metod a jejich efektivitu v degenerovaných situacích, stejně jako výkon existujících iteračních solverů~\cite{HartleyPriors, Chandraker}, a navrhneme zlepšení solveru {~\cite{HartleyPriors}}.
+
+Dále provedeme analýzu problému výpočtu ohniskové vzdálenosti z hlediska algebraické geometrie. Ukážeme, že kromě Bougnouxova vzorce existují další dva vzorce pro výpočet ohniskové vzdálenosti kamery z fundamentální matice. Ukážeme, že použitím spravného z těchto vzorců se můžeme v některých případech vyhnout známé degeneraci. Konkrétně takové, kde rovina definovaná baselineou a optickou osou jedné kamery je kolmá na rovinu definovanou baselineou a optickou osou druhé kamery, a kde Bougnouxův vzorec ~\cite{Bougnoux} selhává. Degenerace se redukuje na případ, kdy selhávají všechny tři vzorce.
+
+\paragraph{Klíčová slova:} počítačové vidění, 3D rekonstrukce, minimální problémy, ohnisková vzdálenost, Gr\"obnerovy báze
+\end{otherlanguage}
+
+\endinput
